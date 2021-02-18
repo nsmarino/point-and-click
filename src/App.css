@@ -6,7 +6,12 @@ and different levels are hidden by default until their navigational menhir is cl
   cursor: pointer;
 }
 
-.level {
+.chapter {
   display: none;
   opacity: 0;
+}
+
+.nav:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

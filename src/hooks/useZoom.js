@@ -6,16 +6,25 @@ import {fullView} from '../constants'
 const useZoom = () => {
   const [zoom, setZoom] = useState(fullView)
 
-  const navigate = (currentLevel, previousLevel, transition) => {
-    if (zoom===currentLevel) {
-      setZoom(previousLevel)
-      transition.reverse()
-    } else { 
-      setZoom(currentLevel)
-    }
+  // const navigate = (currentLevel, previousLevel, transition) => {
+  //   if (zoom===currentLevel) {
+  //     setZoom(previousLevel)
+  //     transition.reverse()
+  //   } else { 
+  //     setZoom(currentLevel)
+  //   }
+  // }
+  const enter = (chapter, transition) => {
+    setZoom(chapter)
+    transition.restart()
   }
 
-  return [navigate, zoom]
+  const leave = (transition) => {
+    setZoom(fullView)
+    transition.reverse()
+  }
+
+  return [enter, leave, zoom]
 }
 
 export default useZoom
