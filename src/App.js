@@ -4,23 +4,11 @@ import ChapterOne from './components/ChapterOne'
 import Title from './components/Title'
 import './App.css'
 
-// The game is a single svg image with different 'levels' that you access by clicking
-// on menhirs. Clicking a menhir adjusts the svg's viewbox to 'zoom in' using gsap
-// to control the transition.
-// The basic idea is that gsap is used for animation and react is used for 
-// state management and conditional rendering. GSAP is not designed for react, especially react of the hooks variety, so a custom useTimelines hook abstracts away incompatibilities.
-
 const App = () => {
-
-  // This custom hook returns the current zoom level, which is used by SVGContainer
-  // to set the viewbox. It also returns a function called navigate that allows you
-  // to set linear pathways through the levels. You can also provide a transition
-  // animation for use when switching between levels.
   const [enter, leave, zoom] = useZoom()
 
   return (
   <main>
-
     <SVGContainer zoom={zoom}>
       <Title />  
       <ChapterOne enter={enter} leave={leave} zoom={zoom} />  
@@ -33,3 +21,17 @@ export default App
 
 // React for conditional rendering and state management
 // Greensock for animations
+
+// import { useState } from 'react'
+
+// // This is a very straightforward hook that I just wrote so I didnt have to pass both levels and setLevels to App's children components. Instead, I just pass unlock, which is a more straightforward way to set a level as available. Custom hooks for reusable logic. Thats the key to modern react in my opinion. 
+
+// const useLevels = () => {
+//   const [levels, setLevels] = useState({one:true, two: false})
+
+//   const unlock = (level) => setLevels({...levels, ...level})
+
+//   return [levels, unlock]
+// }
+
+// export default useLevels

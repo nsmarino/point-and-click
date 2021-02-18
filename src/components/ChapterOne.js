@@ -4,7 +4,6 @@ import { chapterOneView} from '../constants'
 import { pullLever, turnGear, showChapter } from '../animations'
 
 // The animations for each piece of the level are grouped into an array outside of the component so that they do not re-trigger the useTimelines hook when state changes
-// const leverAnimations = [pullLever]
 const chapterAnimations = [showChapter]
 const gearAnimations = [turnGear]
 const leverAnimations = [pullLever]
@@ -20,15 +19,17 @@ const ChapterOne = ({enter, leave}) => {
 
   const handleLeverClick = () => {
       pullLever.restart()
-      if(gearsTurning) {
-        bigGearTimelines.turnGear.pause()
-        smallGearTimelines.turnGear.pause()
-      }
-      if (!gearsTurning) {
-        bigGearTimelines.turnGear.play()
-        smallGearTimelines.turnGear.play()
-      }
-      setGearsTurning(!gearsTurning)
+      pullLever.eventCallback("onComplete", () => {
+        if(gearsTurning) {
+          bigGearTimelines.turnGear.pause()
+          smallGearTimelines.turnGear.pause()
+        }
+        if (!gearsTurning) {
+          bigGearTimelines.turnGear.play()
+          smallGearTimelines.turnGear.play()
+        }
+        setGearsTurning(!gearsTurning)
+      });
   }
 
   return (<>
