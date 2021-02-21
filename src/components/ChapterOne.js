@@ -3,15 +3,13 @@ import { useState } from 'react'
 import { chapterOneView} from '../constants'
 import { pullLever, turnGear, showChapter } from '../animations'
 
-// The animations for each piece of the level are grouped into an array outside of the component so that they do not re-trigger the useTimelines hook when state changes
 const chapterAnimations = [showChapter]
 const gearAnimations = [turnGear]
 const leverAnimations = [pullLever]
 
 const ChapterOne = ({enter, leave}) => {
   const [gearsTurning, setGearsTurning] = useState(false)
-  // The useTimelines hook gives us a ref to attach to the piece we want to animate, and a timelines controller so we can start and stop its animations.
-  // const [leverRef, leverTimelines] = useTimelines(leverAnimations)
+
   const [chapterRef, { showChapter }] = useTimelines(chapterAnimations)
   const [bigGearRef, bigGearTimelines] = useTimelines(gearAnimations)
   const [smallGearRef, smallGearTimelines] = useTimelines(gearAnimations)
@@ -34,9 +32,10 @@ const ChapterOne = ({enter, leave}) => {
 
   return (<>
   <text onClick={() => enter(chapterOneView, showChapter)}class="nav" transform="translate(3680.29 7617.9)" font-size="400" fill="#231f20" font-family="CourierNewPSMT, Courier New">CHAPTER ONE</text>
-<g id="chapterOne" class="chapter" ref={chapterRef}>
+  
+  <g id="chapterOne" class="chapter" ref={chapterRef}>
 
-<path id="sky" d="M5757.5,7537.5h-75v-75h75Z" transform="translate(0.5 0.5)" fill="#fee5d6" stroke="#231f20" stroke-miterlimit="10" stroke-width="0.25"/>
+  <path id="sky" d="M5757.5,7537.5h-75v-75h75Z" transform="translate(0.5 0.5)" fill="#fee5d6" stroke="#231f20" stroke-miterlimit="10" stroke-width="0.25"/>
 
 <polygon id="mountain" points="5683 7504.56 5692.85 7488.18 5699.3 7486.57 5708.46 7486.57 5717.88 7475.97 5719.83 7470.03 5722.54 7466.04 5725.6 7463.58 5727.97 7465.79 5732.13 7470.96 5734.33 7469.27 5736.45 7469.35 5739.42 7472.06 5744.94 7479.02 5749.77 7485.89 5752.83 7489.37 5755.2 7490.47 5758 7491.58 5758 7538 5683 7538 5683 7504.56" fill="#b09586" stroke="#231f20" stroke-miterlimit="10" stroke-width="0.25"/>
 
